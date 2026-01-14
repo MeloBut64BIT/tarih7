@@ -1,6 +1,6 @@
 const config = {
   appId: 'com.masaustu.tahir',
-  appName: 'Tahir Masaüstü',
+  appName: 'Tarihte Bugün',
   webDir: 'dist',
   server: {
     androidScheme: 'https'
