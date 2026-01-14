@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font Face Tanımlamaları */
+@font-face {
+  font-family: 'Freshman';
+  src: url('/fonts/Freshman.ttf') format('truetype'),
+       url('/fonts/Freshman.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Basketball';
+  src: url('/fonts/Basketball.ttf') format('truetype'),
+       url('/fonts/Basketball.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f0e8;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Font Sınıfları */
+.font-freshman {
+  font-family: 'Freshman', sans-serif;
+}
+
+.font-basketball {
+  font-family: 'Basketball', sans-serif;
+}
+

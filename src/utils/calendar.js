@@ -1,0 +1,84 @@
+// Hicri ve Rumi takvim hesaplama fonksiyonları
+
+const HICRI_BASLANGIC = 227015; // 16 Temmuz 622 Miladi = 1 Muharrem 1 Hicri
+const RUMI_BASLANGIC = 584; // 13 Mart 1840 Miladi = 1 Mart 1256 Rumi
+
+// Miladi yılı Hicri yıla çevir
+export function miladiToHicri(miladiYil, miladiAy, miladiGun) {
+  const miladiTarih = new Date(miladiYil, miladiAy - 1, miladiGun);
+  const referansTarih = new Date(622, 6, 16); // 16 Temmuz 622
+  
+  const gunFarki = Math.floor((miladiTarih - referansTarih) / (1000 * 60 * 60 * 24));
+  const hicriGun = (gunFarki % 354) + 1;
+  const hicriYil = Math.floor(gunFarki / 354) + 1;
+  
+  // Basitleştirilmiş ay hesaplama
+  const hicriAy = Math.floor((gunFarki % 354) / 29.5) + 1;
+  const hicriAyAdlari = [
+    'Muharrem', 'Safer', 'Rebiülevvel', 'Rebiülahir',
+    'Cemaziyelevvel', 'Cemaziyelahir', 'Recep', 'Şaban',
+    'Ramazan', 'Şevval', 'Zilkade', 'Zilhicce'
+  ];
+  
+  return {
+    yil: hicriYil,
+    ay: hicriAy > 12 ? 12 : hicriAy < 1 ? 1 : hicriAy,
+    gun: hicriGun > 30 ? 30 : hicriGun < 1 ? 1 : hicriGun,
+    ayAdi: hicriAyAdlari[Math.min(hicriAy - 1, 11)]
+  };
+}
+
+// Miladi yılı Rumi yıla çevir (basitleştirilmiş)
+export function miladiToRumi(miladiYil, miladiAy, miladiGun) {
+  // Rumi takvim 13 Mart'ta başlar
+  let rumiYil = miladiYil - 584;
+  let rumiAy = miladiAy;
+  let rumiGun = miladiGun;
+  
+  if (miladiAy < 3 || (miladiAy === 3 && miladiGun < 13)) {
+    rumiYil -= 1;
+  }
+  
+  const rumiAyAdlari = [
+    'Mart', 'Nisan', 'Mayıs', 'Haziran',
+    'Temmuz', 'Ağustos', 'Eylül', 'Ekim',
+    'Kasım', 'Aralık', 'Ocak', 'Şubat'
+  ];
+  
+  // Rumi takvimde Mart ayı başlangıç
+  let ayIndex = (miladiAy + 9) % 12;
+  
+  return {
+    yil: rumiYil,
+    ay: rumiAy,
+    gun: rumiGun,
+    ayAdi: rumiAyAdlari[ayIndex]
+  };
+}
+
+// Türkçe tarih formatı
+export function formatTarih(tarih) {
+  const gunler = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+  const aylar = [
+    'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+  ];
+  
+  const gun = tarih.getDate();
+  const ay = aylar[tarih.getMonth()];
+  const yil = tarih.getFullYear();
+  const gunAdi = gunler[tarih.getDay()];
+  
+  return `${gun} ${ay} ${yil} ${gunAdi}`;
+}
+
+// Kısa tarih formatı (13 Ocak)
+export function formatKisaTarih(tarih) {
+  const aylar = [
+    'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+  ];
+  
+  return `${tarih.getDate()} ${aylar[tarih.getMonth()]}`;
+}
+
