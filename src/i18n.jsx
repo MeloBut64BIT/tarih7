@@ -34,6 +34,8 @@ const translations = {
       languageTitle: 'Dil / Language',
       languageCurrentTr: 'Mevcut Dil: Türkçe',
       languageCurrentEn: 'Current Language: English',
+      languageTr: 'Türkçe',
+      languageEn: 'English',
     },
     footer: {
       copyright: "Tüm hakları Leblebi Soft'a aittir",
@@ -46,6 +48,20 @@ const translations = {
       previous: 'Önceki Tarih',
       next: 'Sonraki Tarih',
       continue: 'Devam Et',
+      months: [
+        'Ocak',
+        'Şubat',
+        'Mart',
+        'Nisan',
+        'Mayıs',
+        'Haziran',
+        'Temmuz',
+        'Ağustos',
+        'Eylül',
+        'Ekim',
+        'Kasım',
+        'Aralık',
+      ],
     },
     events: {
       back: 'Geri',
@@ -86,6 +102,10 @@ const translations = {
       youtubeButton: "YouTube'da İzle",
       wikipediaButton: "Wikipedia'da Oku",
     },
+    list: {
+      loading: 'Yükleniyor...',
+      empty: 'Bu tarihte kayıtlı olay bulunamadı.',
+    },
   },
   en: {
     app: {
@@ -117,6 +137,8 @@ const translations = {
       languageTitle: 'Dil / Language',
       languageCurrentTr: 'Mevcut Dil: Türkçe',
       languageCurrentEn: 'Current Language: English',
+      languageTr: 'Turkish',
+      languageEn: 'English',
     },
     footer: {
       copyright: 'All rights reserved by Leblebi Soft',
@@ -129,6 +151,20 @@ const translations = {
       previous: 'Previous Date',
       next: 'Next Date',
       continue: 'Continue',
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
     },
     events: {
       back: 'Back',
@@ -168,6 +204,10 @@ const translations = {
       noResults: 'No results found',
       youtubeButton: 'Watch on YouTube',
       wikipediaButton: 'Read on Wikipedia',
+    },
+    list: {
+      loading: 'Loading...',
+      empty: 'No recorded events for this date.',
     },
   },
 }
@@ -251,5 +291,3 @@ export function LanguageProvider({ children }) {
 }
 
 export const useLanguage = () => useContext(LanguageContext)
-
-
