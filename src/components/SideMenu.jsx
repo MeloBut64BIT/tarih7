@@ -4,6 +4,19 @@ import { X, Heart, Settings, Sun, Moon, Instagram, Youtube, Info } from 'lucide-
 function SideMenu({ acik, kapat, tema, setTema }) {
   const [aktifSekme, setAktifSekme] = useState('hakkimizda') // hakkimizda, tesekkur, ayarlar
 
+  const handleTesekkurEt = () => {
+    try {
+      const yeniPencere = window.open('https://www.buymeacoffee.com/tarihtebugun', '_blank')
+
+      if (!yeniPencere) {
+        throw new Error('Pencere engellendi')
+      }
+    } catch (error) {
+      console.error('Teşekkür sayfası açılamadı:', error)
+      alert('Maalesef teşekkür sayfası açılamadı. Lütfen daha sonra tekrar deneyin.')
+    }
+  }
+
   const handleTemaDegistir = () => {
     const yeniTema = tema === 'light' ? 'dark' : 'light'
     try {
@@ -124,7 +137,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
                   Destek özelliği yakında aktif olacak
                 </p>
                 <button
-                  disabled
+                  onClick={handleTesekkurEt}
                   className="px-6 py-3 bg-islamic-green/30 dark:bg-green-900/30 text-islamic-beige dark:text-gray-400 font-semibold rounded-lg cursor-not-allowed opacity-50"
                 >
                   Teşekkür Et
