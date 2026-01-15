@@ -13,21 +13,7 @@ function App() {
   const [ekran, setEkran] = useState('date-selection') // 'date-selection', 'event-list', 'event-detail'
   const [seciliTarih, setSeciliTarih] = useState(new Date())
   const [seciliOlay, setSeciliOlay] = useState(null)
-  const [kullanici, setKullanici] = useState(null)
   const [tema, setTema] = useState('light')
-
-  // Kullanıcı yükleme
-  useEffect(() => {
-    try {
-      const kayitliKullanici = localStorage.getItem('userData')
-      if (kayitliKullanici) {
-        const parsed = JSON.parse(kayitliKullanici)
-        setKullanici(parsed)
-      }
-    } catch (error) {
-      console.error('Kullanıcı bilgisi yüklenirken hata:', error)
-    }
-  }, [])
 
   // Tema yükleme
   useEffect(() => {
@@ -128,8 +114,6 @@ function App() {
       <SideMenu 
         acik={menuAcik} 
         kapat={() => setMenuAcik(false)}
-        kullanici={kullanici}
-        setKullanici={setKullanici}
         tema={tema}
         setTema={setTema}
       />

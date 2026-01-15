@@ -44,7 +44,7 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
 
   return (
     <div className="max-w-2xl mx-auto w-full flex items-center justify-center min-h-[50vh]">
-      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-5 md:p-6 border border-islamic-light/20 dark:border-gray-700 w-full max-h-[50vh] overflow-y-auto">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-4 sm:p-5 md:p-6 border border-islamic-light/20 dark:border-gray-700 w-full max-h-[60vh] overflow-y-auto">
         <div className="text-center mb-4">
           <Calendar className="mx-auto mb-2 text-islamic-green dark:text-green-400" size={36} />
           <h2 className="text-xl md:text-2xl font-bold text-islamic-dark dark:text-white">
@@ -54,7 +54,7 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
 
         {/* Tarih Seçici */}
         <div className="mb-4">
-          <div className="flex flex-col md:flex-row gap-3 items-center justify-center mb-4">
+          <div className="flex flex-col sm:flex-row gap-3 items-center justify-center mb-4">
             {/* Gün Seçici */}
             <div className="flex-1 w-full">
               <label className="block text-sm font-medium text-islamic-dark dark:text-gray-300 mb-1.5">
@@ -117,17 +117,17 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
           </div>
 
           {/* Önceki/Sonraki Butonları */}
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-2 sm:gap-3">
             <button
               onClick={oncekiTarih}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-islamic-dark dark:text-gray-300 bg-islamic-light/20 dark:bg-gray-700/50 hover:bg-islamic-light/30 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium text-islamic-dark dark:text-gray-300 bg-islamic-light/20 dark:bg-gray-700/50 hover:bg-islamic-light/30 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               <ChevronLeft size={16} />
               <span>Önceki Tarih</span>
             </button>
             <button
               onClick={sonrakiTarih}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-islamic-dark dark:text-gray-300 bg-islamic-light/20 dark:bg-gray-700/50 hover:bg-islamic-light/30 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium text-islamic-dark dark:text-gray-300 bg-islamic-light/20 dark:bg-gray-700/50 hover:bg-islamic-light/30 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               <span>Sonraki Tarih</span>
               <ChevronRight size={16} />

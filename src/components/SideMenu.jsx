@@ -1,34 +1,8 @@
 import { useState } from 'react'
-import { X, User, Heart, Settings, LogIn, LogOut, Sun, Moon } from 'lucide-react'
+import { X, Heart, Settings, Sun, Moon, Instagram, Youtube, Info } from 'lucide-react'
 
-function SideMenu({ acik, kapat, kullanici, setKullanici, tema, setTema }) {
-  const [aktifSekme, setAktifSekme] = useState('bilgilerim') // bilgilerim, tesekkur, ayarlar
-  const [girisFormuAcik, setGirisFormuAcik] = useState(false)
-  const [kullaniciAdi, setKullaniciAdi] = useState('')
-
-  const handleGirisYap = () => {
-    if (kullaniciAdi.trim()) {
-      const yeniKullanici = { username: kullaniciAdi.trim() }
-      try {
-        localStorage.setItem('userData', JSON.stringify(yeniKullanici))
-        setKullanici(yeniKullanici)
-        setKullaniciAdi('')
-        setGirisFormuAcik(false)
-      } catch (error) {
-        console.error('Kullanıcı kaydedilirken hata:', error)
-        alert('Kullanıcı kaydedilemedi. Lütfen tekrar deneyin.')
-      }
-    }
-  }
-
-  const handleCikisYap = () => {
-    try {
-      localStorage.removeItem('userData')
-      setKullanici(null)
-    } catch (error) {
-      console.error('Kullanıcı çıkışı yapılırken hata:', error)
-    }
-  }
+function SideMenu({ acik, kapat, tema, setTema }) {
+  const [aktifSekme, setAktifSekme] = useState('hakkimizda') // hakkimizda, tesekkur, ayarlar
 
   const handleTemaDegistir = () => {
     const yeniTema = tema === 'light' ? 'dark' : 'light'
@@ -62,14 +36,14 @@ function SideMenu({ acik, kapat, kullanici, setKullanici, tema, setTema }) {
       {/* Sekmeler */}
       <div className="flex border-b border-islamic-green/20 dark:border-green-700/50">
         <button
-          onClick={() => setAktifSekme('bilgilerim')}
+          onClick={() => setAktifSekme('hakkimizda')}
           className={`flex-1 py-3 px-4 text-sm font-medium transition-colors ${
-            aktifSekme === 'bilgilerim'
+            aktifSekme === 'hakkimizda'
               ? 'bg-islamic-green/30 dark:bg-green-900/30 text-white border-b-2 border-islamic-green dark:border-green-400'
               : 'text-islamic-beige dark:text-gray-400 hover:bg-islamic-green/10 dark:hover:bg-green-900/20'
           }`}
         >
-          Bilgilerim
+          Hakkımızda
         </button>
         <button
           onClick={() => setAktifSekme('tesekkur')}
@@ -95,82 +69,44 @@ function SideMenu({ acik, kapat, kullanici, setKullanici, tema, setTema }) {
 
       {/* İçerik */}
       <div className="flex-1 overflow-y-auto p-4">
-        {/* Bilgilerim Sekmesi */}
-        {aktifSekme === 'bilgilerim' && (
-          <div className="space-y-4">
-            {!kullanici ? (
-              <>
-                {!girisFormuAcik ? (
-                  <div className="text-center py-8">
-                    <User size={48} className="mx-auto mb-4 text-islamic-beige dark:text-gray-400 opacity-70" />
-                    <p className="text-islamic-beige dark:text-gray-300 mb-4">
-                      Giriş yapmak için kullanıcı adınızı girin
-                    </p>
-                    <button
-                      onClick={() => setGirisFormuAcik(true)}
-                      className="flex items-center justify-center gap-2 px-6 py-3 bg-islamic-green hover:bg-islamic-green/80 text-white font-semibold rounded-lg transition-colors mx-auto"
-                    >
-                      <LogIn size={20} />
-                      <span>Giriş Yap</span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold mb-4">Giriş Yap</h3>
-                    <div>
-                      <label className="block text-sm font-medium text-islamic-beige dark:text-gray-300 mb-2">
-                        Kullanıcı Adı
-                      </label>
-                      <input
-                        type="text"
-                        value={kullaniciAdi}
-                        onChange={(e) => setKullaniciAdi(e.target.value)}
-                        placeholder="Kullanıcı adınızı girin"
-                        className="w-full px-4 py-2 rounded-lg bg-islamic-dark/50 dark:bg-gray-800 border border-islamic-green/30 dark:border-green-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-islamic-green dark:focus:ring-green-500"
-                        onKeyPress={(e) => {
-                          if (e.key === 'Enter') {
-                            handleGirisYap()
-                          }
-                        }}
-                      />
-                    </div>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={handleGirisYap}
-                        className="flex-1 px-4 py-2 bg-islamic-green hover:bg-islamic-green/80 text-white font-semibold rounded-lg transition-colors"
-                      >
-                        Giriş Yap
-                      </button>
-                      <button
-                        onClick={() => {
-                          setGirisFormuAcik(false)
-                          setKullaniciAdi('')
-                        }}
-                        className="px-4 py-2 bg-islamic-dark/50 dark:bg-gray-800 hover:bg-islamic-dark/70 dark:hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
-                      >
-                        İptal
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="space-y-4">
-                <div className="text-center py-4">
-                  <User size={48} className="mx-auto mb-4 text-islamic-green dark:text-green-400" />
-                  <p className="text-lg font-semibold mb-2">
-                    Hoş geldin, {kullanici.username}!
-                  </p>
-                </div>
-                <button
-                  onClick={handleCikisYap}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-red-600/20 hover:bg-red-600/30 border border-red-600/30 text-red-300 font-semibold rounded-lg transition-colors"
-                >
-                  <LogOut size={20} />
-                  <span>Çıkış Yap</span>
-                </button>
-              </div>
-            )}
+        {/* Hakkımızda Sekmesi */}
+        {aktifSekme === 'hakkimizda' && (
+          <div className="space-y-4 py-2">
+            <div className="text-center">
+              <Info size={44} className="mx-auto mb-3 text-islamic-green dark:text-green-400 opacity-80" />
+              <h3 className="text-xl font-bold mb-2">Hakkımızda</h3>
+              <p className="text-islamic-beige dark:text-gray-300 leading-relaxed text-sm">
+                Sosyal medya hesaplarımızdan bizi takip edebilirsiniz.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3">
+              <a
+                href="https://www.instagram.com/dunyatarihindbugun/?hl=tr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-95"
+              >
+                <Instagram size={20} />
+                <span>Instagram</span>
+              </a>
+
+              <a
+                href="https://www.youtube.com/@tarihtebugunde"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-95"
+              >
+                <Youtube size={20} />
+                <span>YouTube</span>
+              </a>
+            </div>
+
+            <div className="pt-4 border-t border-islamic-green/20 dark:border-green-700/50">
+              <p className="text-center text-xs text-islamic-beige/80 dark:text-gray-400">
+                Tüm hakları Leblebi Soft&apos;a aittir
+              </p>
+            </div>
           </div>
         )}
 
