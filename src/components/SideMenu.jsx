@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { X, Heart, Settings, Sun, Moon, Instagram, Youtube, Info } from 'lucide-react'
+import { useLanguage } from '../i18n'
 
 function SideMenu({ acik, kapat, tema, setTema }) {
   const [aktifSekme, setAktifSekme] = useState('hakkimizda') // hakkimizda, tesekkur, ayarlar
+  const { language, toggleLanguage, t } = useLanguage()
 
   const handleTesekkurEt = () => {
     try {
@@ -36,11 +38,11 @@ function SideMenu({ acik, kapat, tema, setTema }) {
     >
       {/* Menu Header */}
       <div className="flex items-center justify-between p-4 border-b border-islamic-green dark:border-green-700">
-        <h2 className="text-xl font-bold">Menü</h2>
+        <h2 className="text-xl font-bold">{t('menu.title')}</h2>
         <button
           onClick={kapat}
           className="p-2 hover:bg-islamic-green dark:hover:bg-green-800 rounded-lg transition-colors"
-          aria-label="Menüyü Kapat"
+          aria-label={t('menu.close')}
         >
           <X size={24} />
         </button>
@@ -56,7 +58,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
               : 'text-islamic-beige dark:text-gray-400 hover:bg-islamic-green/10 dark:hover:bg-green-900/20'
           }`}
         >
-          Hakkımızda
+          {t('menu.about')}
         </button>
         <button
           onClick={() => setAktifSekme('tesekkur')}
@@ -66,7 +68,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
               : 'text-islamic-beige dark:text-gray-400 hover:bg-islamic-green/10 dark:hover:bg-green-900/20'
           }`}
         >
-          Teşekkür Et
+          {t('menu.thank')}
         </button>
         <button
           onClick={() => setAktifSekme('ayarlar')}
@@ -76,7 +78,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
               : 'text-islamic-beige dark:text-gray-400 hover:bg-islamic-green/10 dark:hover:bg-green-900/20'
           }`}
         >
-          Ayarlar
+          {t('menu.settings')}
         </button>
       </div>
 
@@ -87,9 +89,9 @@ function SideMenu({ acik, kapat, tema, setTema }) {
           <div className="space-y-4 py-2">
             <div className="text-center">
               <Info size={44} className="mx-auto mb-3 text-islamic-green dark:text-green-400 opacity-80" />
-              <h3 className="text-xl font-bold mb-2">Hakkımızda</h3>
+              <h3 className="text-xl font-bold mb-2">{t('menu.aboutTitle')}</h3>
               <p className="text-islamic-beige dark:text-gray-300 leading-relaxed text-sm">
-                Sosyal medya hesaplarımızdan bizi takip edebilirsiniz.
+                {t('menu.aboutText')}
               </p>
             </div>
 
@@ -101,7 +103,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
                 className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-95"
               >
                 <Instagram size={20} />
-                <span>Instagram</span>
+                <span>{t('menu.instagram')}</span>
               </a>
 
               <a
@@ -111,13 +113,13 @@ function SideMenu({ acik, kapat, tema, setTema }) {
                 className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-95"
               >
                 <Youtube size={20} />
-                <span>YouTube</span>
+                <span>{t('menu.youtube')}</span>
               </a>
             </div>
 
             <div className="pt-4 border-t border-islamic-green/20 dark:border-green-700/50">
               <p className="text-center text-xs text-islamic-beige/80 dark:text-gray-400">
-                Tüm hakları Leblebi Soft&apos;a aittir
+                {t('menu.copyright')}
               </p>
             </div>
           </div>
@@ -128,19 +130,19 @@ function SideMenu({ acik, kapat, tema, setTema }) {
           <div className="space-y-4 py-4">
             <div className="text-center">
               <Heart size={48} className="mx-auto mb-4 text-red-500 opacity-70" />
-              <h3 className="text-xl font-bold mb-2">Bizi Destekle</h3>
+              <h3 className="text-xl font-bold mb-2">{t('menu.thankTitle')}</h3>
               <p className="text-islamic-beige dark:text-gray-300 mb-6 leading-relaxed">
-                Çalışmalarımızı beğendiyseniz bize destek olabilirsiniz
+                {t('menu.thankText')}
               </p>
               <div className="bg-islamic-dark/50 dark:bg-gray-800/50 rounded-lg p-6 border border-islamic-green/20 dark:border-green-700/50">
                 <p className="text-sm text-islamic-beige dark:text-gray-400 mb-4">
-                  Destek özelliği yakında aktif olacak
+                  {t('menu.thankSoon')}
                 </p>
                 <button
                   onClick={handleTesekkurEt}
                   className="px-6 py-3 bg-islamic-green hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 text-white font-semibold rounded-lg shadow-lg transition-colors"
                 >
-                  Teşekkür Et
+                  {t('menu.thankButton')}
                 </button>
               </div>
             </div>
@@ -152,7 +154,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
           <div className="space-y-4 py-4">
             <div className="text-center mb-6">
               <Settings size={48} className="mx-auto mb-4 text-islamic-green dark:text-green-400 opacity-70" />
-              <h3 className="text-xl font-bold mb-2">Tema Ayarları</h3>
+              <h3 className="text-xl font-bold mb-2">{t('menu.settingsTitle')}</h3>
             </div>
             
             <div className="bg-islamic-dark/50 dark:bg-gray-800/50 rounded-lg p-6 border border-islamic-green/20 dark:border-green-700/50">
@@ -165,7 +167,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
                   )}
                   <div>
                     <div className="font-semibold">
-                      {tema === 'light' ? '☀️ Aydınlık Tema' : '🌙 Koyu Tema'}
+                      {tema === 'light' ? t('menu.themeLight') : t('menu.themeDark')}
                     </div>
                   </div>
                 </div>
@@ -181,6 +183,31 @@ function SideMenu({ acik, kapat, tema, setTema }) {
                     }`}
                   />
                 </button>
+              </div>
+
+              {/* Dil Ayarı */}
+              <div className="mt-6 pt-4 border-t border-islamic-green/20 dark:border-green-700/50">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <div className="font-semibold">{t('menu.languageTitle')}</div>
+                    <div className="text-xs text-islamic-beige/80 dark:text-gray-400 mt-1">
+                      {language === 'tr' ? t('menu.languageCurrentTr') : t('menu.languageCurrentEn')}
+                    </div>
+                  </div>
+                  <button
+                    onClick={toggleLanguage}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      language === 'tr' ? 'bg-islamic-green dark:bg-green-600' : 'bg-gray-300'
+                    }`}
+                    aria-label="Dil değiştir"
+                  >
+                    <span
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        language === 'tr' ? 'translate-x-6' : 'translate-x-1'
+                      }`}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
