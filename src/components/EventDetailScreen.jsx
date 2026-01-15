@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react'
 import { formatTarih, miladiToHicri, miladiToRumi } from '../utils/calendar'
 import { wikipediaDetayGetir } from '../services/wikipedia'
-import { useLanguage } from '../i18n'
+import { useLanguage } from '../i18n.jsx'
 
 function EventDetailScreen({ olay, tarih, onGeriDon }) {
   const [detayliAciklama, setDetayliAciklama] = useState(null)

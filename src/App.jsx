@@ -6,7 +6,7 @@ import EventListScreen from './components/EventListScreen'
 import EventDetailScreen from './components/EventDetailScreen'
 import SearchModal from './components/SearchModal'
 import Footer from './components/Footer'
-import { useLanguage } from './i18n'
+import { useLanguage } from './i18n.jsx'
 
 function App() {
   const [menuAcik, setMenuAcik] = useState(false)

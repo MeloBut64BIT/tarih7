@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { X, Search as SearchIcon, ExternalLink } from 'lucide-react'
 import { wikipediaAra, wikipediaSayfaDetayGetir } from '../services/wikipedia'
-import { useLanguage } from '../i18n'
+import { useLanguage } from '../i18n.jsx'
 
 function SearchModal({ acik, kapat, tema }) {
   const [aramaTerimi, setAramaTerimi] = useState('')

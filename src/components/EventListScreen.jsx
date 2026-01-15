@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { ArrowLeft, Calendar, User, XCircle, Filter, X } from 'lucide-react'
 import { formatTarih } from '../utils/calendar'
 import { wikipediaOlaylariGetir, olaylariIsle } from '../services/wikipedia'
-import { useLanguage } from '../i18n'
+import { useLanguage } from '../i18n.jsx'
 import { filtreKategorileri, olaylariFiltrele, kategoriSayilariHesapla } from '../utils/filterUtils'
 
 function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {

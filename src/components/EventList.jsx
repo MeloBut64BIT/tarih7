@@ -1,5 +1,5 @@
 import { Calendar, User, XCircle } from 'lucide-react'
-import { useLanguage } from '../i18n'
+import { useLanguage } from '../i18n.jsx'
 
 function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
   const { t } = useLanguage()

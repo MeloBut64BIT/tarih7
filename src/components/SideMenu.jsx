@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { X, Heart, Settings, Sun, Moon, Instagram, Youtube, Info } from 'lucide-react'
-import { useLanguage } from '../i18n'
+import { useLanguage } from '../i18n.jsx'
 
 function SideMenu({ acik, kapat, tema, setTema }) {
   const [aktifSekme, setAktifSekme] = useState('hakkimizda') // hakkimizda, tesekkur, ayarlar

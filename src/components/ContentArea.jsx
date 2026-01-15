@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Calendar, ExternalLink } from 'lucide-react'
 import { formatTarih, miladiToHicri, miladiToRumi } from '../utils/calendar'
 import { wikipediaDetayGetir } from '../services/wikipedia'
-import { useLanguage } from '../i18n'
+import { useLanguage } from '../i18n.jsx'
 
 function ContentArea({ olay, tarih }) {
   const [detayliAciklama, setDetayliAciklama] = useState(null)

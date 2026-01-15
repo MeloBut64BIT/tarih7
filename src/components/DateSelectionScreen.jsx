@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react'
 import { formatKisaTarih } from '../utils/calendar'
-import { useLanguage } from '../i18n'
+import { useLanguage } from '../i18n.jsx'
 
 function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
   const [ay, setAy] = useState(seciliTarih.getMonth() + 1)
