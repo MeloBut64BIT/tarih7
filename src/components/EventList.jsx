@@ -1,11 +1,14 @@
 import { Calendar, User, XCircle } from 'lucide-react'
+import { useLanguage } from '../i18n'
 
 function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
+  const { t } = useLanguage()
+
   if (yukleniyor) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-islamic-green"></div>
-        <span className="ml-4 text-islamic-beige">Yükleniyor...</span>
+        <span className="ml-4 text-islamic-beige">{t('list.loading')}</span>
       </div>
     )
   }
@@ -14,7 +17,7 @@ function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
     return (
       <div className="text-center py-12 text-islamic-beige">
         <XCircle size={48} className="mx-auto mb-4 opacity-50" />
-        <p>Bu tarihte kayıtlı olay bulunamadı.</p>
+        <p>{t('list.empty')}</p>
       </div>
     )
   }

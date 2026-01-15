@@ -4,7 +4,7 @@ import { useLanguage } from '../i18n'
 
 function SideMenu({ acik, kapat, tema, setTema }) {
   const [aktifSekme, setAktifSekme] = useState('hakkimizda') // hakkimizda, tesekkur, ayarlar
-  const { language, toggleLanguage, t } = useLanguage()
+  const { language, setLanguage, t } = useLanguage()
 
   const handleTesekkurEt = () => {
     try {
@@ -187,25 +187,36 @@ function SideMenu({ acik, kapat, tema, setTema }) {
 
               {/* Dil Ayarı */}
               <div className="mt-6 pt-4 border-t border-islamic-green/20 dark:border-green-700/50">
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-3">
                   <div>
                     <div className="font-semibold">{t('menu.languageTitle')}</div>
                     <div className="text-xs text-islamic-beige/80 dark:text-gray-400 mt-1">
                       {language === 'tr' ? t('menu.languageCurrentTr') : t('menu.languageCurrentEn')}
                     </div>
                   </div>
+                </div>
+                <div className="inline-flex rounded-full bg-gray-700/60 border border-islamic-green/40 overflow-hidden">
                   <button
-                    onClick={toggleLanguage}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      language === 'tr' ? 'bg-islamic-green dark:bg-green-600' : 'bg-gray-300'
+                    type="button"
+                    onClick={() => setLanguage('tr')}
+                    className={`px-4 py-1 text-xs font-semibold transition-colors ${
+                      language === 'tr'
+                        ? 'bg-islamic-green text-white'
+                        : 'text-islamic-beige hover:bg-gray-600'
                     }`}
-                    aria-label="Dil değiştir"
                   >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        language === 'tr' ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
+                    {t('menu.languageTr')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage('en')}
+                    className={`px-4 py-1 text-xs font-semibold transition-colors border-l border-islamic-green/40 ${
+                      language === 'en'
+                        ? 'bg-islamic-green text-white'
+                        : 'text-islamic-beige hover:bg-gray-600'
+                    }`}
+                  >
+                    {t('menu.languageEn')}
                   </button>
                 </div>
               </div>
