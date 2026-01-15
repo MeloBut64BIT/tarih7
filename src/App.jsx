@@ -6,7 +6,6 @@ import EventListScreen from './components/EventListScreen'
 import EventDetailScreen from './components/EventDetailScreen'
 import SearchModal from './components/SearchModal'
 import Footer from './components/Footer'
-import { useLanguage } from './i18n.jsx'
 
 function App() {
   const [menuAcik, setMenuAcik] = useState(false)
@@ -15,7 +14,6 @@ function App() {
   const [seciliTarih, setSeciliTarih] = useState(new Date())
   const [seciliOlay, setSeciliOlay] = useState(null)
   const [tema, setTema] = useState('light')
-  const { t } = useLanguage()
 
   // Tema yükleme
   useEffect(() => {
@@ -79,7 +77,7 @@ function App() {
           <button
             onClick={() => setMenuAcik(!menuAcik)}
             className="p-2 hover:bg-islamic-green dark:hover:bg-green-800 rounded-lg transition-colors"
-            aria-label={t('header.menu')}
+            aria-label="Menü"
           >
             <Menu size={24} />
           </button>
@@ -91,21 +89,21 @@ function App() {
                 e.preventDefault()
                 anaSayfayaDon()
               }}
-            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
               <img
                 src="/logo.png"
                 alt="Logo"
                 className="h-12 md:h-16 w-12 md:w-16 rounded-full object-cover"
               />
-              <h1 className="text-lg md:text-xl font-bold font-freshman">{t('header.appName')}</h1>
+              <h1 className="text-lg md:text-xl font-bold font-freshman">Tarihte Bugün</h1>
             </a>
           </div>
           
           <button
             onClick={() => setAramaAcik(true)}
             className="p-2 hover:bg-islamic-green dark:hover:bg-green-800 rounded-lg transition-colors"
-            aria-label={t('header.search')}
+            aria-label="Ara"
           >
             <Search size={24} />
           </button>

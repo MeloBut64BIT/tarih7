@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react'
 import { formatKisaTarih } from '../utils/calendar'
-import { useLanguage } from '../i18n.jsx'
 
 function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
   const [ay, setAy] = useState(seciliTarih.getMonth() + 1)
   const [gun, setGun] = useState(seciliTarih.getDate())
-  const { language, t } = useLanguage()
 
   useEffect(() => {
     setAy(seciliTarih.getMonth() + 1)
     setGun(seciliTarih.getDate())
   }, [seciliTarih])
 
-  const aylar = t('date.months') || [
+  const aylar = [
     'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık',
+    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
   ]
 
   const oncekiTarih = () => {
@@ -50,7 +48,7 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
         <div className="text-center mb-4">
           <Calendar className="mx-auto mb-2 text-islamic-green dark:text-green-400" size={36} />
           <h2 className="text-xl md:text-2xl font-bold text-islamic-dark dark:text-white">
-            {t('date.selectTitle')}
+            Bir Tarih Seçin
           </h2>
         </div>
 
@@ -60,7 +58,7 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
             {/* Gün Seçici */}
             <div className="flex-1 w-full">
               <label className="block text-sm font-medium text-islamic-dark dark:text-gray-300 mb-1.5">
-                {t('date.dayLabel')}
+                Gün
               </label>
               <select
                 value={gun}
@@ -82,7 +80,7 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
             {/* Ay Seçici */}
             <div className="flex-1 w-full">
               <label className="block text-sm font-medium text-islamic-dark dark:text-gray-300 mb-1.5">
-                {t('date.monthLabel')}
+                Ay
               </label>
               <select
                 value={ay}
@@ -110,10 +108,10 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
           <div className="text-center mb-4">
             <div className="inline-block px-4 py-2 bg-islamic-green/10 dark:bg-green-900/30 rounded-lg border border-islamic-green/20 dark:border-green-700/50">
               <p className="text-xs text-islamic-green dark:text-green-400 font-medium mb-0.5">
-                {t('date.selectedDateLabel')}
+                Seçilen Tarih
               </p>
               <p className="text-lg font-bold text-islamic-dark dark:text-white">
-                {formatKisaTarih(seciliTarih, language)}
+                {formatKisaTarih(seciliTarih)}
               </p>
             </div>
           </div>
@@ -125,13 +123,13 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
               className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium text-islamic-dark dark:text-gray-300 bg-islamic-light/20 dark:bg-gray-700/50 hover:bg-islamic-light/30 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               <ChevronLeft size={16} />
-              <span>{t('date.previous')}</span>
+              <span>Önceki Tarih</span>
             </button>
             <button
               onClick={sonrakiTarih}
               className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium text-islamic-dark dark:text-gray-300 bg-islamic-light/20 dark:bg-gray-700/50 hover:bg-islamic-light/30 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
-              <span>{t('date.next')}</span>
+              <span>Sonraki Tarih</span>
               <ChevronRight size={16} />
             </button>
           </div>
@@ -143,7 +141,7 @@ function DateSelectionScreen({ seciliTarih, onTarihSecildi, onIleriGec }) {
             onClick={handleDevamEt}
             className="px-6 py-2.5 bg-islamic-green hover:bg-islamic-dark text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105 text-sm md:text-base"
           >
-            {t('date.continue')}
+            Devam Et
           </button>
         </div>
       </div>

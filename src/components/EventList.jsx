@@ -1,26 +1,20 @@
 import { Calendar, User, XCircle } from 'lucide-react'
-import { useLanguage } from '../i18n.jsx'
 
-function EventList({ olaylar = [], seciliOlay, olaySecildi, yukleniyor }) {
-  const { t } = useLanguage()
-
+function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
   if (yukleniyor) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-islamic-green"></div>
-        <span className="ml-4 text-islamic-beige">{t('list.loading')}</span>
+        <span className="ml-4 text-islamic-beige">Yükleniyor...</span>
       </div>
     )
   }
 
-  // Array güvenliği ekleyin
-  const safeOlaylar = Array.isArray(olaylar) ? olaylar : []
-
-  if (safeOlaylar.length === 0) {
+  if (!olaylar || olaylar.length === 0) {
     return (
       <div className="text-center py-12 text-islamic-beige">
         <XCircle size={48} className="mx-auto mb-4 opacity-50" />
-        <p>{t('list.empty')}</p>
+        <p>Bu tarihte kayıtlı olay bulunamadı.</p>
       </div>
     )
   }
@@ -38,12 +32,12 @@ function EventList({ olaylar = [], seciliOlay, olaySecildi, yukleniyor }) {
 
   return (
     <div className="space-y-2">
-      {safeOlaylar.map((olay, index) => {
+      {olaylar.map((olay, index) => {
         const seciliMi = seciliOlay && seciliOlay.baslik === olay.baslik && seciliOlay.yil === olay.yil
         
         return (
           <button
-            key={`${olay.yil}-${olay.baslik}-${index}`}
+            key={index}
             onClick={() => olaySecildi(olay)}
             className={`w-full text-right p-4 rounded-lg border transition-all duration-200 ${
               seciliMi
@@ -76,3 +70,4 @@ function EventList({ olaylar = [], seciliOlay, olaySecildi, yukleniyor }) {
 }
 
 export default EventList
+

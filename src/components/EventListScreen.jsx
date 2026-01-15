@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { ArrowLeft, Calendar, User, XCircle, Filter, X } from 'lucide-react'
 import { formatTarih } from '../utils/calendar'
 import { wikipediaOlaylariGetir, olaylariIsle } from '../services/wikipedia'
-import { useLanguage } from '../i18n.jsx'
 import { filtreKategorileri, olaylariFiltrele, kategoriSayilariHesapla } from '../utils/filterUtils'
 
 function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
@@ -14,11 +13,10 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
   const [filtreAcik, setFiltreAcik] = useState(false)
   const [kategoriSayilari, setKategoriSayilari] = useState({})
   const dropdownRef = useRef(null)
-  const { language, t } = useLanguage()
 
   useEffect(() => {
     olaylariYukle()
-  }, [seciliTarih, language])
+  }, [seciliTarih])
 
   // Dropdown dışına tıklanınca kapat
   useEffect(() => {
@@ -51,14 +49,14 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
     try {
       const ay = seciliTarih.getMonth() + 1
       const gun = seciliTarih.getDate()
-      const apiData = await wikipediaOlaylariGetir(ay, gun, language)
+      const apiData = await wikipediaOlaylariGetir(ay, gun)
       const islenmisOlaylar = olaylariIsle(apiData)
       setTumOlaylar(islenmisOlaylar)
       const sayilar = kategoriSayilariHesapla(islenmisOlaylar)
       setKategoriSayilari(sayilar)
     } catch (error) {
       console.error('Olaylar yüklenirken hata:', error)
-      setHata(t('events.error'))
+      setHata('Olaylar yüklenirken bir hata oluştu. Lütfen tekrar deneyin.')
       setTumOlaylar([])
       setOlaylar([])
     } finally {
@@ -108,7 +106,7 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
     }
   }
 
-  const kategoriler = filtreKategorileri(language)
+  const kategoriler = filtreKategorileri()
   const seciliKategori = kategoriler.find(k => k.id === seciliFiltre)
 
   return (
@@ -119,7 +117,7 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
         className="flex items-center gap-2 mb-4 text-islamic-dark dark:text-white hover:text-islamic-green dark:hover:text-green-400 transition-colors font-medium"
       >
         <ArrowLeft size={20} />
-        <span>{t('events.back')}</span>
+        <span>Geri</span>
       </button>
 
       {/* Tarih Bilgisi ve Filtre */}
@@ -128,7 +126,7 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
           <div className="flex items-center gap-3">
             <Calendar className="text-islamic-green dark:text-green-400" size={24} />
             <h2 className="text-2xl font-bold text-islamic-dark dark:text-white font-basketball">
-              {formatTarih(seciliTarih, language)}
+              {formatTarih(seciliTarih)}
             </h2>
           </div>
         </div>
@@ -141,7 +139,7 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
               className="flex items-center gap-2 px-4 py-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl border border-islamic-light/20 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               <Filter size={20} className="text-islamic-green dark:text-green-400" />
-              <span className="text-islamic-dark dark:text-white font-medium">{t('events.filter')}</span>
+              <span className="text-islamic-dark dark:text-white font-medium">Filtrele</span>
             </button>
 
             {/* Dropdown Menü */}
@@ -186,21 +184,21 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
       {/* Aktif Filtre Göstergesi */}
       {!yukleniyor && !hata && seciliFiltre !== 'all' && olaylar.length > 0 && (
         <div className="mb-4 flex items-center gap-2 flex-wrap">
-              <div className="flex items-center gap-2 px-4 py-2 bg-islamic-green/10 dark:bg-green-900/30 rounded-lg border border-islamic-green/20 dark:border-green-700/50">
+          <div className="flex items-center gap-2 px-4 py-2 bg-islamic-green/10 dark:bg-green-900/30 rounded-lg border border-islamic-green/20 dark:border-green-700/50">
             <span className="text-lg">{seciliKategori?.ikon}</span>
-              <span className="text-sm font-medium text-islamic-dark dark:text-white">
-                {t('events.filterPrefix', { name: seciliKategori?.ad || '' })}
-              </span>
+            <span className="text-sm font-medium text-islamic-dark dark:text-white">
+              Filtre: {seciliKategori?.ad}
+            </span>
             <button
               onClick={handleFiltreTemizle}
               className="ml-2 p-1 hover:bg-islamic-green/20 dark:hover:bg-green-900/40 rounded transition-colors"
-              aria-label={t('events.clearFilterAria')}
+              aria-label="Filtreyi Temizle"
             >
               <X size={16} className="text-islamic-green dark:text-green-400" />
             </button>
           </div>
           <span className="text-sm text-gray-600 dark:text-gray-400">
-            {t('events.count', { count: olaylar.length })}
+            {olaylar.length} olay bulundu
           </span>
         </div>
       )}
@@ -210,7 +208,7 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
         <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-12 border border-islamic-light/20 dark:border-gray-700 text-center">
           <div className="flex items-center justify-center gap-3">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-islamic-green dark:border-green-400"></div>
-            <span className="text-islamic-dark dark:text-white">{t('events.loading')}</span>
+            <span className="text-islamic-dark dark:text-white">Olaylar yükleniyor...</span>
           </div>
         </div>
       ) : hata ? (
@@ -221,16 +219,16 @@ function EventListScreen({ seciliTarih, onGeriDon, onOlaySecildi }) {
         <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-12 border border-islamic-light/20 dark:border-gray-700 text-center">
           <XCircle size={48} className="mx-auto mb-4 text-islamic-dark/50 dark:text-gray-500" />
           <p className="text-islamic-dark dark:text-gray-300">
-            {seciliFiltre !== 'all'
-              ? t('events.noneForFilter')
-              : t('events.noneForDate')}
+            {seciliFiltre !== 'all' 
+              ? `Bu kategoride olay bulunamadı.`
+              : 'Bu tarihte kayıtlı olay bulunamadı.'}
           </p>
         </div>
       ) : (
         <>
           {seciliFiltre === 'all' && tumOlaylar.length > 0 && (
             <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-              {t('events.count', { count: olaylar.length })}
+              {olaylar.length} olay bulundu
             </div>
           )}
           <div className="space-y-3">

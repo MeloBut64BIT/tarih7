@@ -56,85 +56,29 @@ export function miladiToRumi(miladiYil, miladiAy, miladiGun) {
   };
 }
 
-// Tarih formatı (dil destekli)
-export function formatTarih(tarih, language = 'tr') {
-  const gunlerTr = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi']
-  const aylarTr = [
-    'Ocak',
-    'Şubat',
-    'Mart',
-    'Nisan',
-    'Mayıs',
-    'Haziran',
-    'Temmuz',
-    'Ağustos',
-    'Eylül',
-    'Ekim',
-    'Kasım',
-    'Aralık',
-  ]
-
-  const gunlerEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const aylarEn = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-
-  const gunler = language === 'en' ? gunlerEn : gunlerTr
-  const aylar = language === 'en' ? aylarEn : aylarTr
-
-  const gun = tarih.getDate()
-  const ay = aylar[tarih.getMonth()]
-  const yil = tarih.getFullYear()
-  const gunAdi = gunler[tarih.getDay()]
-
-  return `${gun} ${ay} ${yil} ${gunAdi}`
+// Türkçe tarih formatı
+export function formatTarih(tarih) {
+  const gunler = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+  const aylar = [
+    'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+  ];
+  
+  const gun = tarih.getDate();
+  const ay = aylar[tarih.getMonth()];
+  const yil = tarih.getFullYear();
+  const gunAdi = gunler[tarih.getDay()];
+  
+  return `${gun} ${ay} ${yil} ${gunAdi}`;
 }
 
-// Kısa tarih formatı (13 Ocak / 13 January)
-export function formatKisaTarih(tarih, language = 'tr') {
-  const aylarTr = [
-    'Ocak',
-    'Şubat',
-    'Mart',
-    'Nisan',
-    'Mayıs',
-    'Haziran',
-    'Temmuz',
-    'Ağustos',
-    'Eylül',
-    'Ekim',
-    'Kasım',
-    'Aralık',
-  ]
-
-  const aylarEn = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-
-  const aylar = language === 'en' ? aylarEn : aylarTr
-
-  return `${tarih.getDate()} ${aylar[tarih.getMonth()]}`
+// Kısa tarih formatı (13 Ocak)
+export function formatKisaTarih(tarih) {
+  const aylar = [
+    'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+  ];
+  
+  return `${tarih.getDate()} ${aylar[tarih.getMonth()]}`;
 }
 

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { X, Search as SearchIcon, ExternalLink } from 'lucide-react'
 import { wikipediaAra, wikipediaSayfaDetayGetir } from '../services/wikipedia'
-import { useLanguage } from '../i18n.jsx'
 
 function SearchModal({ acik, kapat, tema }) {
   const [aramaTerimi, setAramaTerimi] = useState('')
@@ -12,7 +11,6 @@ function SearchModal({ acik, kapat, tema }) {
   const [detayYukleniyor, setDetayYukleniyor] = useState(false)
   const inputRef = useRef(null)
   const timeoutRef = useRef(null)
-  const { language, t } = useLanguage()
 
   // Modal açıldığında input'a focus
   useEffect(() => {
@@ -57,12 +55,12 @@ function SearchModal({ acik, kapat, tema }) {
 
     timeoutRef.current = setTimeout(async () => {
       try {
-        const aramaSonuclari = await wikipediaAra(aramaTerimi.trim(), language)
+        const aramaSonuclari = await wikipediaAra(aramaTerimi.trim())
         setSonuclar(aramaSonuclari)
         setHata(null)
       } catch (error) {
         console.error('Arama hatası:', error)
-        setHata(t('search.error'))
+        setHata('Arama yapılırken bir hata oluştu. Lütfen tekrar deneyin.')
         setSonuclar([])
       } finally {
         setYukleniyor(false)
@@ -74,12 +72,12 @@ function SearchModal({ acik, kapat, tema }) {
         clearTimeout(timeoutRef.current)
       }
     }
-  }, [aramaTerimi, language])
+  }, [aramaTerimi])
 
   const handleSonucSecildi = async (sonuc) => {
     setDetayYukleniyor(true)
     try {
-      const detay = await wikipediaSayfaDetayGetir(sonuc.title, language)
+      const detay = await wikipediaSayfaDetayGetir(sonuc.title)
       if (detay) {
         setSeciliSonuc({
           ...sonuc,
@@ -132,14 +130,14 @@ function SearchModal({ acik, kapat, tema }) {
                 type="text"
                 value={aramaTerimi}
                 onChange={(e) => setAramaTerimi(e.target.value)}
-                placeholder={t('search.placeholder')}
+                placeholder="Olay, kişi veya tarih ara..."
                 className="flex-1 bg-transparent border-none outline-none text-lg text-islamic-dark dark:text-white placeholder-gray-400"
               />
             </div>
             <button
               onClick={kapat}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-              aria-label={t('search.closeAria')}
+              aria-label="Kapat"
             >
               <X size={24} className="text-gray-600 dark:text-gray-300" />
             </button>
@@ -154,13 +152,13 @@ function SearchModal({ acik, kapat, tema }) {
                   onClick={handleGeriSonuclara}
                   className="flex items-center gap-2 text-islamic-green dark:text-green-400 hover:text-islamic-dark dark:hover:text-green-300 transition-colors font-medium mb-4"
                 >
-                  {t('search.back')}
+                  ← Geri
                 </button>
 
                 {detayYukleniyor ? (
                   <div className="flex items-center justify-center py-12">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-islamic-green dark:border-green-400"></div>
-                    <span className="ml-4 text-islamic-dark dark:text-white">{t('search.loading')}</span>
+                    <span className="ml-4 text-islamic-dark dark:text-white">Yükleniyor...</span>
                   </div>
                 ) : (
                   <>
@@ -202,7 +200,7 @@ function SearchModal({ acik, kapat, tema }) {
                         className="flex-1 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2"
                       >
                         <ExternalLink size={20} />
-                        <span>{t('search.youtubeButton')}</span>
+                        <span>YouTube'da İzle</span>
                       </button>
                       <a
                         href={seciliSonuc.url}
@@ -211,7 +209,7 @@ function SearchModal({ acik, kapat, tema }) {
                         className="flex-1 px-6 py-3 bg-islamic-green hover:bg-islamic-dark text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2 text-center"
                       >
                         <ExternalLink size={20} />
-                        <span>{t('search.wikipediaButton')}</span>
+                        <span>Wikipedia'da Oku</span>
                       </a>
                     </div>
                   </>
@@ -223,7 +221,7 @@ function SearchModal({ acik, kapat, tema }) {
                 {yukleniyor ? (
                   <div className="flex items-center justify-center py-12">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-islamic-green dark:border-green-400"></div>
-                    <span className="ml-4 text-islamic-dark dark:text-white">{t('search.searching')}</span>
+                    <span className="ml-4 text-islamic-dark dark:text-white">Aranıyor...</span>
                   </div>
                 ) : hata ? (
                   <div className="text-center py-12">
@@ -232,21 +230,21 @@ function SearchModal({ acik, kapat, tema }) {
                       onClick={() => setAramaTerimi('')}
                       className="px-4 py-2 bg-islamic-green hover:bg-islamic-dark text-white rounded-lg transition-colors"
                     >
-                      {t('search.retry')}
+                      Tekrar Dene
                     </button>
                   </div>
                 ) : aramaTerimi.trim().length < 3 ? (
                   <div className="text-center py-12">
                     <SearchIcon size={48} className="mx-auto mb-4 text-gray-300 dark:text-gray-600 opacity-50" />
                     <p className="text-gray-500 dark:text-gray-400">
-                      {t('search.minChars')}
+                      Arama yapmak için en az 3 karakter girin
                     </p>
                   </div>
                 ) : sonuclar.length === 0 ? (
                   <div className="text-center py-12">
                     <SearchIcon size={48} className="mx-auto mb-4 text-gray-300 dark:text-gray-600 opacity-50" />
                     <p className="text-gray-500 dark:text-gray-400">
-                      {t('search.noResults')}
+                      Sonuç bulunamadı
                     </p>
                   </div>
                 ) : (

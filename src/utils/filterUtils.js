@@ -51,37 +51,15 @@ export function olayKategorisiBelirle(olay) {
  * Filtre kategorilerini tanımlar
  * @returns {Array} Kategori listesi
  */
-export function filtreKategorileri(language = 'tr') {
-  const tr = {
-    all: 'Tüm Olaylar',
-    events: 'Olaylar',
-    births: 'Doğumlar',
-    deaths: 'Vefatlar',
-    foundations: 'Kurullar',
-    celebrations: 'Kutlamalar',
-    discoveries: 'Keşifler',
-  }
-
-  const en = {
-    all: 'All Events',
-    events: 'Events',
-    births: 'Births',
-    deaths: 'Deaths',
-    foundations: 'Foundations',
-    celebrations: 'Celebrations',
-    discoveries: 'Discoveries',
-  }
-
-  const labels = language === 'en' ? en : tr
-
+export function filtreKategorileri() {
   return [
-    { id: 'all', ad: labels.all, ikon: '📅', renk: 'text-gray-600 dark:text-gray-400' },
-    { id: 'events', ad: labels.events, ikon: '⚔️', renk: 'text-purple-600 dark:text-purple-400' },
-    { id: 'births', ad: labels.births, ikon: '👶', renk: 'text-blue-600 dark:text-blue-400' },
-    { id: 'deaths', ad: labels.deaths, ikon: '💀', renk: 'text-red-600 dark:text-red-400' },
-    { id: 'foundations', ad: labels.foundations, ikon: '🏛️', renk: 'text-orange-600 dark:text-orange-400' },
-    { id: 'celebrations', ad: labels.celebrations, ikon: '🎉', renk: 'text-yellow-600 dark:text-yellow-400' },
-    { id: 'discoveries', ad: labels.discoveries, ikon: '🔬', renk: 'text-green-600 dark:text-green-400' },
+    { id: 'all', ad: 'Tüm Olaylar', ikon: '📅', renk: 'text-gray-600 dark:text-gray-400' },
+    { id: 'events', ad: 'Olaylar', ikon: '⚔️', renk: 'text-purple-600 dark:text-purple-400' },
+    { id: 'births', ad: 'Doğumlar', ikon: '👶', renk: 'text-blue-600 dark:text-blue-400' },
+    { id: 'deaths', ad: 'Vefatlar', ikon: '💀', renk: 'text-red-600 dark:text-red-400' },
+    { id: 'foundations', ad: 'Kurullar', ikon: '🏛️', renk: 'text-orange-600 dark:text-orange-400' },
+    { id: 'celebrations', ad: 'Kutlamalar', ikon: '🎉', renk: 'text-yellow-600 dark:text-yellow-400' },
+    { id: 'discoveries', ad: 'Keşifler', ikon: '🔬', renk: 'text-green-600 dark:text-green-400' }
   ]
 }
 

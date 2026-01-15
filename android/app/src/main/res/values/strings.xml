@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Today in History</string>
-    <string name="title_activity_main">Today in History</string>
+    <string name="app_name">Tarihte Bugün</string>
+    <string name="title_activity_main">Tarihte Bugün</string>
     <string name="package_name">com.masaustu.tarih</string>
     <string name="custom_url_scheme">com.masaustu.tarih</string>
 </resources>

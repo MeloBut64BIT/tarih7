@@ -3,9 +3,7 @@ const config = {
   appName: 'Tarihte Bugün',
   webDir: 'dist',
   server: {
-    androidScheme: 'https',
-    hostname: 'app',
-    cleartext: true
+    androidScheme: 'https'
   }
 };
 

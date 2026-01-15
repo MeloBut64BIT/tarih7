@@ -4,17 +4,15 @@
  * Wikipedia On This Day API'den belirli bir tarihin olaylarını çeker
  * @param {number} ay - Ay (1-12)
  * @param {number} gun - Gün (1-31)
- * @param {string} language - Dil kodu ('tr' | 'en')
  * @returns {Promise<Object>} API yanıtı
  */
-export async function wikipediaOlaylariGetir(ay, gun, language = 'tr') {
+export async function wikipediaOlaylariGetir(ay, gun) {
   try {
     // Ay ve günü 2 haneli string formatına çevir
     const ayStr = String(ay).padStart(2, '0')
     const gunStr = String(gun).padStart(2, '0')
-    const lang = language === 'en' ? 'en' : 'tr'
-
-    const url = `https://api.wikimedia.org/feed/v1/wikipedia/${lang}/onthisday/all/${ayStr}/${gunStr}`
+    
+    const url = `https://api.wikimedia.org/feed/v1/wikipedia/tr/onthisday/all/${ayStr}/${gunStr}`
     
     const response = await fetch(url)
     
@@ -92,13 +90,11 @@ export function olaylariIsle(apiData) {
 /**
  * Wikipedia sayfasından detaylı açıklama çeker
  * @param {string} title - Wikipedia sayfa başlığı
- * @param {string} language - Dil kodu ('tr' | 'en')
  * @returns {Promise<string>} Sayfa açıklaması
  */
-export async function wikipediaDetayGetir(title, language = 'tr') {
+export async function wikipediaDetayGetir(title) {
   try {
-    const lang = language === 'en' ? 'en' : 'tr'
-    const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`
+    const url = `https://tr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`
     const response = await fetch(url)
     
     if (!response.ok) {
@@ -116,19 +112,15 @@ export async function wikipediaDetayGetir(title, language = 'tr') {
 /**
  * Wikipedia'da arama yapar (OpenSearch API)
  * @param {string} query - Arama terimi
- * @param {string} language - Dil kodu ('tr' | 'en')
  * @returns {Promise<Array>} Arama sonuçları [{title, description, url}]
  */
-export async function wikipediaAra(query, language = 'tr') {
+export async function wikipediaAra(query) {
   try {
     if (!query || query.length < 3) {
       return []
     }
 
-    const lang = language === 'en' ? 'en' : 'tr'
-    const url = `https://${lang}.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${encodeURIComponent(
-      query,
-    )}&limit=10&format=json`
+    const url = `https://tr.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${encodeURIComponent(query)}&limit=10&format=json`
     const response = await fetch(url)
     
     if (!response.ok) {
@@ -141,11 +133,11 @@ export async function wikipediaAra(query, language = 'tr') {
       const titles = data[1] || []
       const descriptions = data[2] || []
       const urls = data[3] || []
-
+      
       return titles.map((title, index) => ({
         title: title,
         description: descriptions[index] || '',
-        url: urls[index] || `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(title)}`,
+        url: urls[index] || `https://tr.wikipedia.org/wiki/${encodeURIComponent(title)}`
       }))
     }
     
@@ -159,15 +151,11 @@ export async function wikipediaAra(query, language = 'tr') {
 /**
  * Wikipedia sayfası detaylarını çeker (query API)
  * @param {string} title - Sayfa başlığı
- * @param {string} language - Dil kodu ('tr' | 'en')
  * @returns {Promise<Object>} {title, extract, thumbnail}
  */
-export async function wikipediaSayfaDetayGetir(title, language = 'tr') {
+export async function wikipediaSayfaDetayGetir(title) {
   try {
-    const lang = language === 'en' ? 'en' : 'tr'
-    const url = `https://${lang}.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts|pageimages&exintro&titles=${encodeURIComponent(
-      title,
-    )}&format=json&piprop=thumbnail&pithumbsize=500`
+    const url = `https://tr.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts|pageimages&exintro&titles=${encodeURIComponent(title)}&format=json&piprop=thumbnail&pithumbsize=500`
     const response = await fetch(url)
     
     if (!response.ok) {
