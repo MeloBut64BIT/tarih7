@@ -138,7 +138,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
                 </p>
                 <button
                   onClick={handleTesekkurEt}
-                  className="px-6 py-3 bg-islamic-green/30 dark:bg-green-900/30 text-islamic-beige dark:text-gray-400 font-semibold rounded-lg cursor-not-allowed opacity-50"
+                  className="px-6 py-3 bg-islamic-green hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 text-white font-semibold rounded-lg shadow-lg transition-colors"
                 >
                   Teşekkür Et
                 </button>
