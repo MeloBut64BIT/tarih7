@@ -1,7 +1,7 @@
 import { Calendar, User, XCircle } from 'lucide-react'
 import { useLanguage } from '../i18n.jsx'
 
-function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
+function EventList({ olaylar = [], seciliOlay, olaySecildi, yukleniyor }) {
   const { t } = useLanguage()
 
   if (yukleniyor) {
@@ -13,7 +13,10 @@ function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
     )
   }
 
-  if (!olaylar || olaylar.length === 0) {
+  // Array güvenliği ekleyin
+  const safeOlaylar = Array.isArray(olaylar) ? olaylar : []
+
+  if (safeOlaylar.length === 0) {
     return (
       <div className="text-center py-12 text-islamic-beige">
         <XCircle size={48} className="mx-auto mb-4 opacity-50" />
@@ -35,12 +38,12 @@ function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
 
   return (
     <div className="space-y-2">
-      {olaylar.map((olay, index) => {
+      {safeOlaylar.map((olay, index) => {
         const seciliMi = seciliOlay && seciliOlay.baslik === olay.baslik && seciliOlay.yil === olay.yil
         
         return (
           <button
-            key={index}
+            key={`${olay.yil}-${olay.baslik}-${index}`}
             onClick={() => olaySecildi(olay)}
             className={`w-full text-right p-4 rounded-lg border transition-all duration-200 ${
               seciliMi
@@ -73,4 +76,3 @@ function EventList({ olaylar, seciliOlay, olaySecildi, yukleniyor }) {
 }
 
 export default EventList
-
