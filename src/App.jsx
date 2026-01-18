@@ -92,7 +92,7 @@ function App() {
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
               <img
-                src="https://imgur.com/a/8ugapGA.png"
+                src="https://i.imgur.com/AMnpIwd.png"
                 alt="Logo"
                 className="h-12 md:h-16 w-12 md:w-16 rounded-full object-cover"
               />
