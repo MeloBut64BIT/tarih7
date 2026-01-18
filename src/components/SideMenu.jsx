@@ -117,7 +117,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
 
             <div className="pt-4 border-t border-islamic-green/20 dark:border-green-700/50">
               <p className="text-center text-xs text-islamic-beige/80 dark:text-gray-400">
-                Tüm hakları Leblebi Soft&apos;a aittir
+                Tüm hakları MTSoft&apos;a aittir
               </p>
             </div>
           </div>
