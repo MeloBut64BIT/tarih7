@@ -66,7 +66,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
               : 'text-islamic-beige dark:text-gray-400 hover:bg-islamic-green/10 dark:hover:bg-green-900/20'
           }`}
         >
-          Teşekkür Et
+          Destek
         </button>
         <button
           onClick={() => setAktifSekme('ayarlar')}
@@ -117,7 +117,7 @@ function SideMenu({ acik, kapat, tema, setTema }) {
 
             <div className="pt-4 border-t border-islamic-green/20 dark:border-green-700/50">
               <p className="text-center text-xs text-islamic-beige/80 dark:text-gray-400">
-                Tüm hakları MTSoft&apos;a aittir
+                Tüm hakları WeatherSoft&apos;a aittir
               </p>
             </div>
           </div>
@@ -130,17 +130,19 @@ function SideMenu({ acik, kapat, tema, setTema }) {
               <Heart size={48} className="mx-auto mb-4 text-red-500 opacity-70" />
               <h3 className="text-xl font-bold mb-2">Bizi Destekle</h3>
               <p className="text-islamic-beige dark:text-gray-300 mb-6 leading-relaxed">
-                Çalışmalarımızı beğendiyseniz bize destek olabilirsiniz
+                Projelerimizi beğendiyseniz, bir kahve ısmarlayarak gelişimimize destek olabilirsiniz.
+                  
               </p>
               <div className="bg-islamic-dark/50 dark:bg-gray-800/50 rounded-lg p-6 border border-islamic-green/20 dark:border-green-700/50">
                 <p className="text-sm text-islamic-beige dark:text-gray-400 mb-4">
-                  Destek özelliği yakında aktif olacak
+                  Bize destek olduğunuz için teşekkür ederiz! ❤️
+                  
                 </p>
                 <button
                   onClick={handleTesekkurEt}
                   className="px-6 py-3 bg-islamic-green hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 text-white font-semibold rounded-lg shadow-lg transition-colors"
                 >
-                  Teşekkür Et
+                  Bi' kahve ?
                 </button>
               </div>
             </div>
