@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { X, Heart, Settings, Sun, Moon, Instagram, Youtube, Info } from 'lucide-react'
+import { X, Heart, Settings, Sun, Moon, Instagram, Youtube, Info, Globe } from 'lucide-react'
 
 function SideMenu({ acik, kapat, tema, setTema }) {
   const [aktifSekme, setAktifSekme] = useState('hakkimizda') // hakkimizda, tesekkur, ayarlar
@@ -105,11 +105,24 @@ function SideMenu({ acik, kapat, tema, setTema }) {
               </a>
 
               <a
+                href="https://weathersoftsite.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-95"
+              >
+                <Globe size={20} />
+                <span>Web Sitesi</span>
+              </a>
+              <a
                 href="https://www.youtube.com/@tarihtebugunde"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-95"
               >
+
+              
+
+
                 <Youtube size={20} />
                 <span>YouTube</span>
               </a>
@@ -120,6 +133,10 @@ function SideMenu({ acik, kapat, tema, setTema }) {
                 Tüm hakları WeatherSoft&apos;a aittir
               </p>
             </div>
+
+
+          
+
           </div>
         )}
 
